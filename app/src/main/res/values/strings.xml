@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FontDemo</string>
+
+    <!--Text Fonts-->
+    <string name="cinderella">Cinderella</string>
+    <string name="lanehum">Lanehum</string>
+    <string name="orangejuice">OrangeJuice</string>
+    <string name="ormontlight">OrmontLight</string>
+    <string name="wedgieregular">WedgieRegular</string>
+</resources>
