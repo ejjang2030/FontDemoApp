@@ -9,7 +9,9 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     boolean isBold = false;
     boolean isItalic = false;
-    boolean isBackground = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,14 +149,9 @@ public class MainActivity extends AppCompatActivity {
         background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isBackground) {
-                    textView.setBackgroundResource(0);
-                    isBackground = false;
-                } else {
-                    textView.setBackgroundResource(R.drawable.gradation);
-                    isBackground = true;
-                }
-
+                // https://www.youtube.com/watch?v=q2GtM1_RmMw 참고
+                Shader shader = new LinearGradient(0, 0, 0, textView.getTextSize(), Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+                textView.getPaint().setShader(shader);
             }
         });
     }
