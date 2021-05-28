@@ -27,15 +27,26 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.emotionwave.fontdemo.customview.StrokeTextView;
+
 public class MainActivity extends AppCompatActivity {
 
     static {
         System.loadLibrary("nativelib");
     }
     Context mContext;
-    TextView textView;
+    StrokeTextView textView;
+
+    // freetype 사용
     boolean isBold = false;
     boolean isItalic = false;
+    boolean isBackground = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.wedgieregular:
                                 textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/wedgieregular.ttf"));
-                                popupmenu.setText("WedgieRegular");
+                                popupmenu.setText("WedgieRegular ");
                                 break;
                         }
                         return true;
@@ -98,6 +109,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textView.setTextColor(Color.BLUE);
+            }
+        });
+        Button strokered = findViewById(R.id.stroke_red);
+        strokered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setStrokeWidth(3);
+                textView.setStrokeColor(Color.RED);
+                //textView.setTypeface(textView.getTypeface(), textView.getTypeface().getStyle());
+            }
+        });
+        Button strokegreen = findViewById(R.id.stroke_green);
+        strokegreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setStrokeWidth(3);
+                textView.setStrokeColor(Color.GREEN);
+                //textView.setTypeface(textView.getTypeface(), textView.getTypeface().getStyle());
+            }
+        });
+        Button strokeblue = findViewById(R.id.stroke_blue);
+        strokeblue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setStrokeWidth(3);
+                textView.setStrokeColor(Color.BLUE);
+                //textView.setTypeface(textView.getTypeface(), textView.getTypeface().getStyle());
             }
         });
         Button bold = findViewById(R.id.bold);
@@ -153,8 +191,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // https://www.youtube.com/watch?v=q2GtM1_RmMw 참고
-                Shader shader = new LinearGradient(0, 0, 0, textView.getTextSize(), Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-                textView.getPaint().setShader(shader);
+                if(isBackground) {
+                    textView.getPaint().setShader(null);
+                    isBackground = false;
+                } else {
+                    Shader shader = new LinearGradient(0, 0, 0, textView.getTextSize(), Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+                    textView.getPaint().setShader(shader);
+                    isBackground = true;
+                }
+
             }
         });
     }

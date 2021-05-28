@@ -21,17 +21,19 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
+    <com.emotionwave.fontdemo.customview.StrokeTextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
-        android:textSize="60sp"
+        android:textSize="100sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        app:strokeJoinStyle="miter"
+        app:outerShadowRadius="10dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +80,15 @@
             android:textColor="@color/white"
             android:id="@+id/italic"
             android:background="@color/purple_500"/>
-
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="set Background"
+            android:textColor="@color/white"
+            android:id="@+id/background"
+            android:background="@color/purple_500"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,6 +120,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/linear2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Internal Color"
+            android:textSize="20sp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -138,13 +153,42 @@
             android:id="@+id/blue"
             android:background="#0000ff"/>
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:text="set Background"
-        android:textColor="@color/white"
-        android:id="@+id/background"
-        android:background="@color/purple_500"/>
+        android:orientation="horizontal"
+        android:id="@+id/linear5">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stroke Color"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="red"
+            android:textColor="@color/white"
+            android:id="@+id/stroke_red"
+            android:background="#ff0000"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="green"
+            android:textColor="@color/white"
+            android:id="@+id/stroke_green"
+            android:background="#00ff00"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="blue"
+            android:textColor="@color/white"
+            android:id="@+id/stroke_blue"
+            android:background="#0000ff"/>
+    </LinearLayout>
 </LinearLayout>
