@@ -16,12 +16,15 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.renderscript.ScriptIntrinsicHistogram;
+import android.renderscript.Type;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("nativelib");
     }
-
     Context mContext;
     TextView textView;
     boolean isBold = false;
@@ -40,40 +42,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mContext = getApplication();
         textView = findViewById(R.id.textview);
-        Button cinderella = findViewById(R.id.cinderella);
-        cinderella.setOnClickListener(new View.OnClickListener() {
+        TextView popupmenu = findViewById(R.id.popupmenu);
+        popupmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("getAssets", getAssets().toString());
-                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/cinderella.otf"));
-            }
-        });
-        Button lanehum = findViewById(R.id.lanehum);
-        lanehum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/lanehum.ttf"));
-            }
-        });
-        Button orangejuice = findViewById(R.id.orangejuice);
-        orangejuice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/orangejuice.ttf"));
-            }
-        });
-        Button ormontlight = findViewById(R.id.ormontlight);
-        ormontlight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/ormontlight.ttf"));
-            }
-        });
-        Button wedgieregular = findViewById(R.id.wedgieregular);
-        wedgieregular.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/wedgieregular.ttf"));
+                PopupMenu popup = new PopupMenu(getApplicationContext(), v);
+                getMenuInflater().inflate(R.menu.select_font_type, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.cinderella:
+                                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/cinderella.otf"));
+                                popupmenu.setText("Cinderella");
+                                break;
+                            case R.id.lanehum:
+                                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/lanehum.ttf"));
+                                popupmenu.setText("Lanehum");
+                                break;
+                            case R.id.orangejuice:
+                                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/orangejuice.ttf"));
+                                popupmenu.setText("OrangeJuice");
+                                break;
+                            case R.id.ormontlight:
+                                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/ormontlight.ttf"));
+                                popupmenu.setText("OrmontLight");
+                                break;
+                            case R.id.wedgieregular:
+                                textView.setTypeface(Typeface.createFromAsset(getAssets(), "font/wedgieregular.ttf"));
+                                popupmenu.setText("WedgieRegular");
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
             }
         });
         Button red = findViewById(R.id.red);
